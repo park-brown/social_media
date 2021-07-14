@@ -1,9 +1,10 @@
-const User = require('../models/User');
+const User = require('../models/User.js');
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 
 //update user
 router.put('/:id', async (req, res) => {
+	console.log('id:', req.params.id);
 	if (req.body.userId === req.params.id || req.body.isAdmin) {
 		if (req.body.password) {
 			try {
@@ -31,7 +32,7 @@ router.delete('/:id', async (req, res) => {
 	if (req.body.userId === req.params.id || req.body.isAdmin) {
 		try {
 			await User.findByIdAndDelete(req.params.id);
-			res.status(200).json('Account has been deleted');
+			res.status(204).json('Account has been deleted');
 		} catch (err) {
 			return res.status(500).json(err);
 		}
@@ -47,7 +48,7 @@ router.get('/:id', async (req, res) => {
 		const { password, updatedAt, ...other } = user._doc;
 		res.status(200).json(other);
 	} catch (err) {
-		res.status(500).json(err);
+		res.status(404).json(err);
 	}
 });
 
@@ -63,7 +64,7 @@ router.put('/:id/follow', async (req, res) => {
 				await currentUser.updateOne({ $push: { followings: req.params.id } });
 				res.status(200).json('user has been followed');
 			} else {
-				res.status(403).json('you allready follow this user');
+				res.status(403).json('you already follow this user');
 			}
 		} catch (err) {
 			res.status(500).json(err);

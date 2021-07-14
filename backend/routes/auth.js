@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const User = require('../models/User');
+const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 
 //REGISTER
@@ -18,7 +18,8 @@ router.post('/register', async (req, res) => {
 
 		//save user and respond
 		const user = await newUser.save();
-		res.status(200).json(user);
+
+		res.status(201).json(user);
 	} catch (err) {
 		res.status(500).json(err);
 	}

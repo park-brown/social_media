@@ -10,13 +10,20 @@ const app = express();
 dotenv.config();
 
 //connnect to mongo
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-	console.log('Connected to MongoDB');
-});
+mongoose
+	.connect(process.env.MONGO_URL, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useCreateIndex: true
+	})
+	.then(() => console.log('DB Connection Successfull'))
+	.catch((err) => {
+		console.error(err);
+	});
 
 // middleware
 app.use(express.json());
-app.use(helmet);
+app.use(helmet());
 app.use(morgan('common'));
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
