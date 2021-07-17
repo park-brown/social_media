@@ -6,6 +6,7 @@ import Rightbar from '../components/rightbar/Rightbar';
 import { styled } from '@material-ui/core/styles';
 import { useMediaQuery } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
+import HomeForMobile from './HomeForMobile';
 const Container = styled(Box, { name: 'container' })(({ theme }) => ({
 	[theme.breakpoints.up('sx')]: {
 		maxWidth: '100%',
@@ -39,7 +40,9 @@ const Home = () => {
 	const below_500 = useMediaQuery(theme.breakpoints.down('mobile'));
 	return (
 		<React.Fragment>
-			{below_500 ? null : (
+			{below_500 ? (
+				<HomeForMobile />
+			) : (
 				<Container>
 					<Leftbar />
 					<Grid
