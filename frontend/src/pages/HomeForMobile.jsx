@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, BottomNavigation, BottomNavigationAction, Fab, Typography } from '@material-ui/core';
+import { Box, BottomNavigation, BottomNavigationAction, Fab } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import HomeIcon from '../components/Icons/HomeIcon';
 import SearchIcon from '../components/Icons/SearchIcon';
